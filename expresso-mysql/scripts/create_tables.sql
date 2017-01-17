@@ -1,6 +1,5 @@
 CREATE DATABASE bloodlines;
 USE bloodlines;
-DROP TABLE IF EXISTS content;
 CREATE TABLE content(
 	id VARCHAR(36) NOT NULL PRIMARY KEY,
 	contentType VARCHAR(20) NOT NULL,
@@ -9,20 +8,17 @@ CREATE TABLE content(
 	status VARCHAR(20) NOT NULL,
 	subject varchar(1024)
 );
-DROP TABLE IF EXISTS job;
 CREATE TABLE job(
 	sendTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	id VARCHAR(36) NOT NULL PRIMARY KEY,
 	sendStatus VARCHAR(20) NOT NULL,
 	receipts VARCHAR(4096) NOT NULL
 );
-DROP TABLE IF EXISTS preference;
 CREATE TABLE preference(
 	id VARCHAR(36) NOT NULL PRIMARY KEY,
 	email VARCHAR(20) NOT NULL,
 	userId VARCHAR(36) NOT NULL
 );
-DROP TABLE IF EXISTS receipt;
 CREATE TABLE receipt(
 	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	id VARCHAR(36) NOT NULL PRIMARY KEY,
@@ -31,11 +27,35 @@ CREATE TABLE receipt(
 	contentId VARCHAR(36) NOT NULL, FOREIGN KEY fk_content(contentId) REFERENCES content(id),
 	userId VARCHAR(36) NOT NULL
 );
-DROP TABLE IF EXISTS b_trigger;
 CREATE TABLE b_trigger(
 	id VARCHAR(36) NOT NULL,
 	tkey VARCHAR(1024) NOT NULL,
 	vals VARCHAR(4096) NOT NULL,
 	contentId  VARCHAR(36) NOT NULL, FOREIGN KEY fk_triggercontent(contentId) REFERENCES content(id),
 	PRIMARY KEY (id)
+);
+
+CREATE DATABASE billing;
+USE billing;
+CREATE TABLE billing_subscription(
+	id VARCHAR(36) NOT NULL PRIMARY KEY,
+	userId VARCHAR(36) NOT NULL,
+	subscriptionId VARCHAR(36) NOT NULL,
+	planId VARCHAR(48) NOT NULL,
+	amount FLOAT(10, 2),
+	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	dueAt TIMESTAMP
+);
+CREATE TABLE customer_account(
+	id VARCHAR(36) NOT NULL PRIMARY KEY,
+	userId VARCHAR(36) NOT NULL,
+	stripeCustomerId VARCHAR(48) NOT NULL,
+	stripeCardId VARCHAR(48),
+	stripeSubscriptionId VARCHAR(48),
+	stripePlanId VARCHAR(48)
+);
+CREATE TABLE roaster_account(
+	id VARCHAR(36) NOT NULL PRIMARY KEY,
+	userId VARCHAR(36) NOT NULL,
+	stripeAccountId VARCHAR(48) NOT NULL
 );

@@ -7,6 +7,12 @@ services:
     links:
       - mysql
       - rabbitmq
+  expresso-billing:
+    image: ghmeier/expresso-billing
+    ports:
+      - "8081:8081"
+    links:
+      - mysql
   mysql:
     image: ghmeier/expresso-mysql
     ports:
