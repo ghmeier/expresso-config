@@ -1,0 +1,22 @@
+version: '2'
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+  mysql:
+    container_name: mysql
+    image: ghmeier/expresso-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      STARTUP_SQL: "/scripts/create_tables.sql"
+      MYSQL_PASS: "bloodlines"
+  rabbitmq:
+    container_name: rabbitmq
+    image: ghmeier/rabbitmq-delayed
+    ports:
+      - "5672:5672"
