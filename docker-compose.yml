@@ -5,10 +5,10 @@ services:
     image: ghmeier/bloodlines
     ports:
       - "8080:8080"
-    # links:
-    #   - mysql
-    #   - rabbitmq
-    #   - statsd
+    links:
+       - mysql
+       - rabbitmq
+       - statsd
     environment:
       VIRTUAL_HOST: "bloodlines.expresso.store"
       VIRTUAL_PORT: "8080"
@@ -17,8 +17,9 @@ services:
     image: ghmeier/coinage
     ports:
       - "8081:8081"
-    # links:
-    #   - mysql
+    links:
+       - mysql
+       - statsd
     environment:
       VIRTUAL_HOST: "coinage.expresso.store"
       VIRTUAL_PORT: "8081"
@@ -27,6 +28,85 @@ services:
     image: ghmeier/expresso
     ports:
       - "9000:9000"
+    links:
+       - mysql
+       - statsd
     environment:
       VIRTUAL_HOST: "expresso.store"
-      VIRTUAL_PORT: "9000"
+      LETSENCRYPT_HOST: "expresso.store"
+      LETSENCRYPT_EMAIL: "meier.garret@gmail.com"
+  covenant:
+    container_name: covenant
+    image: ghmeier/covenant
+    ports:
+      - "8082:8082"
+    links:
+       - mysql
+       - statsd
+    environment:
+      VIRTUAL_HOST: "covenant.expresso.store"
+      VIRTUAL_PORT: "8082"
+  towncenter:
+    container_name: towncenter
+    image: ghmeier/towncenter
+    ports:
+      - "8084:8084"
+    links:
+       - mysql
+       - statsd
+    environment:
+      VIRTUAL_HOST: "towncenter.expresso.store"
+      VIRTUAL_PORT: "8084"
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+      - '/etc/nginx/certs:/etc/nginx/certs:ro'
+      - '/etc/nginx/vhost:/etc/nginx/vhost.d'
+      - '/usr/share/nginx/html:/usr/share/nginx/html'
+    environment:
+      HTTPS_METHOD: "nohttp"
+  nginx-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-letsencrypt
+    volumes:
+      - '/etc/nginx/certs:/etc/nginx/certs:rw'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    volumes_from:
+      - nginx-proxy
+  statsd:
+    container_name: statsd
+    image: hopsoft/graphite-statsd
+    ports:
+      - "81:80"
+      - "2003-2004:2003-2004"
+      - "2023-2024:2023-2024"
+      - "8125:8125/udp"
+      - "8126:8126"
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      VIRTUAL_HOST: "grafana.expresso.store"
+      VIRTUAL_PORT: "3000"
+  mysql:
+    container_name: mysql
+    image: ghmeier/expresso-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      STARTUP_SQL: "/scripts/create_tables.sql"
+      MYSQL_PASS: "bloodlines"
+    volumes:
+      - "/etc/mysql:/var/lib/mysql"
+  rabbitmq:
+    container_name: rabbitmq
+    image: ghmeier/rabbitmq-delayed
+    ports:
+      - "5672:5672"
