@@ -1,0 +1,49 @@
+{
+	"mysql": {
+		"host": "mysql",
+		"port": "3306",
+		"user": "admin",
+		"password": "bloodlines",
+		"database": "warehouse"
+	},
+	"sendgrid": {
+		"api_key": "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",
+		"from_email": "may1734@iastate.edu",
+		"from_name": "Expresso",
+		"host": "https://api.sendgrid.com"
+	},
+	"towncenter": {
+		"host": "towncenter",
+		"port": "8084"
+	},
+	"bloodlines": {
+		"host": "bloodlines",
+		"port": "8080"
+	},
+	"coinage": {
+		"host": "coinage",
+		"port": "8081"
+	},
+	"covenant": {
+		"host": "covenant",
+		"port": "8082"
+	},
+	"warehouse": {
+		"host": "warehouse",
+		"port": "8083"
+	},
+	"rabbit": {
+		"host": "rabbitmq",
+		"port": "5672",
+		"pubq": "messages"
+	},
+	"statsd": {
+		"host": "statsd",
+		"port": "8125",
+		"prefix": "warehouse"
+	},
+	"port": "8083",
+	"tls": {
+		"enabled": false
+	}
+}

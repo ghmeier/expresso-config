@@ -1,3 +1,33 @@
+CREATE DATABASE IF NOT EXISTS towncenter;
+USE towncenter;
+CREATE TABLE roaster(
+	id VARCHAR(36) NOT NULL PRIMARY KEY,
+	name VARCHAR(30) NOT NULL,
+	email VARCHAR(200) NOT NULL,
+	phone VARCHAR(12),
+	addressLine1 VARCHAR(200) NOT NULL,
+	addressLine2 VARCHAR(200) NOT NULL,
+	addressCity VARCHAR(30) NOT NULL,
+	addressState VARCHAR(30) NOT NULL,
+	addressZip VARCHAR(10) NOT NULL,
+	addressCountry VARCHAR(20) NOT NULL
+);
+CREATE TABLE user(
+	id VARCHAR(36) NOT NULL PRIMARY KEY,
+	passHash VARCHAR(50) NOT NULL,
+	firstName VARCHAR(20) NOT NULL,
+	lastName VARCHAR(20) NOT NULL,
+	email VARCHAR(200) NOT NULL,
+	phone VARCHAR(12),
+	addressLine1 VARCHAR(200) NOT NULL,
+	addressLine2 VARCHAR(200) NOT NULL,
+	addressCity VARCHAR(30) NOT NULL,
+	addressState VARCHAR(30) NOT NULL,
+	addressZip VARCHAR(10) NOT NULL,
+	addressCountry VARCHAR(20) NOT NULL,
+	roasterId VARCHAR(36), FOREIGN KEY fk_tcroaster(roasterId) REFERENCES roaster(id)
+	isRoaster SMALLINT
+);
 CREATE DATABASE IF NOT EXISTS bloodlines;
 USE bloodlines;
 CREATE TABLE content(
@@ -37,56 +67,17 @@ CREATE TABLE b_trigger(
 
 CREATE DATABASE IF NOT EXISTS billing;
 USE billing;
-CREATE TABLE billing_subscription(
-	id VARCHAR(36) NOT NULL PRIMARY KEY,
-	userId VARCHAR(36) NOT NULL,
-	subscriptionId VARCHAR(36) NOT NULL,
-	planId VARCHAR(48) NOT NULL,
-	amount FLOAT(10, 2),
-	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	dueAt TIMESTAMP
-);
-CREATE TABLE customer_account(
-	id VARCHAR(36) NOT NULL PRIMARY KEY,
-	userId VARCHAR(36) NOT NULL,
-	stripeCustomerId VARCHAR(48) NOT NULL,
-	stripeCardId VARCHAR(48),
-	stripeSubscriptionId VARCHAR(48),
-	stripePlanId VARCHAR(48)
-);
 CREATE TABLE roaster_account(
 	id VARCHAR(36) NOT NULL PRIMARY KEY,
 	userId VARCHAR(36) NOT NULL,
 	stripeAccountId VARCHAR(48) NOT NULL
 );
-
-CREATE DATABASE IF NOT EXISTS towncenter;
-USE towncenter;
-CREATE TABLE roaster(
-	id VARCHAR(36) NOT NULL PRIMARY KEY,
-	name VARCHAR(30) NOT NULL,
-	email VARCHAR(200) NOT NULL,
-	phone VARCHAR(12),
-	addressLine1 VARCHAR(200) NOT NULL,
-	addressLine2 VARCHAR(200) NOT NULL,
-	addressCity VARCHAR(30) NOT NULL,
-	addressState VARCHAR(30) NOT NULL,
-	addressZip VARCHAR(10) NOT NULL,
-	addressCountry VARCHAR(20) NOT NULL
+CREATE TABLE plan(
+	roasterId VARCHAR(36) NOT NULL, FOREIGN KEY fk_roasterplan(roasterId) REFERENCES roaster_acount(id)
+	planId VARCHAR(36) NOT NULL
 );
-CREATE TABLE user(
+CREATE TABLE customer_account(
 	id VARCHAR(36) NOT NULL PRIMARY KEY,
-	passHash VARCHAR(50) NOT NULL,
-	firstName VARCHAR(20) NOT NULL,
-	lastName VARCHAR(20) NOT NULL,
-	email VARCHAR(200) NOT NULL,
-	phone VARCHAR(12),
-	addressLine1 VARCHAR(200) NOT NULL,
-	addressLine2 VARCHAR(200) NOT NULL,
-	addressCity VARCHAR(30) NOT NULL,
-	addressState VARCHAR(30) NOT NULL,
-	addressZip VARCHAR(10) NOT NULL,
-	addressCountry VARCHAR(20) NOT NULL,
-	roasterId VARCHAR(36),
-	isRoaster SMALLINT
+	userId VARCHAR(36) NOT NULL,
+	stripeCustomerId VARCHAR(48) NOT NULL
 );
