@@ -1,0 +1,15 @@
+FROM golang
+
+ENV PORT "8080"
+ENV GIN_MODE "release"
+
+RUN go get github.com/tools/godep
+RUN go get -u github.com/jakelong95/TownCenter
+WORKDIR /go/src/github.com/jakelong95/TownCenter
+RUN godep restore
+RUN go build
+ADD ./towncenter.json /go/src/github.com/jakelong95/TownCenter/config.json
+
+ENTRYPOINT /go/src/github.com/jakelong95/TownCenter/TownCenter
+
+EXPOSE 8084
