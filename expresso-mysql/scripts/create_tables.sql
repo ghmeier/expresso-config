@@ -69,12 +69,11 @@ CREATE DATABASE IF NOT EXISTS billing;
 USE billing;
 CREATE TABLE roaster_account(
 	id VARCHAR(36) NOT NULL PRIMARY KEY,
-	userId VARCHAR(36) NOT NULL,
 	stripeAccountId VARCHAR(48) NOT NULL
 );
 CREATE TABLE plan(
 	roasterId VARCHAR(36) NOT NULL, FOREIGN KEY fk_roasterplan(roasterId) REFERENCES roaster_acount(id)
-	planId VARCHAR(36) NOT NULL
+	planId VARCHAR(2048) NOT NULL
 );
 CREATE TABLE customer_account(
 	id VARCHAR(36) NOT NULL PRIMARY KEY,

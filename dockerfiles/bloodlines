@@ -3,11 +3,7 @@ FROM golang
 ENV PORT "8080"
 ENV GIN_MODE "release"
 
-RUN go get github.com/tools/godep
-RUN go get -u github.com/ghmeier/bloodlines
-WORKDIR /go/src/github.com/ghmeier/bloodlines
-RUN godep restore
-RUN go build
+ADD ./bloodlines.o /go/src/github.com/ghmeier/bloodlines/bloodlines
 ADD ./bloodlines.json /go/src/github.com/ghmeier/bloodlines/config.json
 
 ENTRYPOINT /go/src/github.com/ghmeier/bloodlines/bloodlines

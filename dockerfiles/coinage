@@ -3,13 +3,9 @@ FROM golang
 ENV PORT "8080"
 ENV GIN_MODE "release"
 
-RUN go get github.com/tools/godep
-RUN go get -u github.com/jonnykry/coinage
-WORKDIR /go/src/github.com/jonnykry/coinage
-RUN godep restore
-RUN go build
-ADD ./coinage.json /go/src/github.com/jonnykry/coinage/config.json
+ADD ./coinage.o /go/src/github.com/ghmeier/coinage/coinage
+ADD ./coinage.json /go/src/github.com/ghmeier/coinage/config.json
 
-ENTRYPOINT /go/src/github.com/jonnykry/coinage/coinage
+ENTRYPOINT /go/src/github.com/ghmeier/coinage/coinage
 
 EXPOSE 8081

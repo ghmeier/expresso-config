@@ -4,7 +4,7 @@
 		"port": "3306",
 		"user": "admin",
 		"password": "bloodlines",
-		"database": "coinage"
+		"database": "billing"
 	},
 	"sendgrid": {
 		"api_key": "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",

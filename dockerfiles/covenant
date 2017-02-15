@@ -3,11 +3,7 @@ FROM golang
 ENV PORT "8080"
 ENV GIN_MODE "release"
 
-RUN go get github.com/tools/godep
-RUN go get -u github.com/yuderekyu/covenant
-WORKDIR /go/src/github.com/yuderekyu/covenant
-RUN godep restore
-RUN go build
+ADD ./covenant.o /go/src/github.com/yuderekyu/covenant/covenant
 ADD ./covenant.json /go/src/github.com/yuderekyu/covenant/config.json
 
 ENTRYPOINT /go/src/github.com/yuderekyu/covenant/bloodlines

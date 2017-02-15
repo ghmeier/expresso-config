@@ -3,11 +3,7 @@ FROM golang
 ENV PORT "8080"
 ENV GIN_MODE "release"
 
-RUN go get github.com/tools/godep
-RUN go get -u github.com/lcollin/warehouse
-WORKDIR /go/src/github.com/lcollin/warehouse
-RUN godep restore
-RUN go build
+ADD ./warehouse.o /go/src/github.com/lcollin/warehouse/warehouse
 ADD ./warehouse.json /go/src/github.com/lcollin/warehouse/config.json
 
 ENTRYPOINT /go/src/github.com/lcollin/warehouse/warehouse
