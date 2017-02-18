@@ -46,6 +46,19 @@ services:
     environment:
       VIRTUAL_HOST: "covenant.expresso.store"
       VIRTUAL_PORT: "8082"
+  warehouse:
+    container_name: warehouse
+    image: ghmeier/warehouse
+    ports:
+      - "8083:8083"
+    links:
+       - mysql
+       - statsd
+    environment:
+      VIRTUAL_HOST: "warehouse.expresso.store"
+      VIRTUAL_PORT: "8083"
+      LETSENCRYPT_HOST: "warehouse.expresso.store"
+      LETSENCRYPT_EMAIL: "meier.garret@gmail.com"
   towncenter:
     container_name: towncenter
     image: ghmeier/towncenter
@@ -95,6 +108,8 @@ services:
     environment:
       VIRTUAL_HOST: "grafana.expresso.store"
       VIRTUAL_PORT: "3000"
+      LETSENCRYPT_HOST: "grafana.expresso.store"
+      LETSENCRYPT_EMAIL: "meier.garret@gmail.com"
   mysql:
     container_name: mysql
     image: ghmeier/expresso-mysql

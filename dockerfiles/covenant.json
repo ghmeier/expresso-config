@@ -42,7 +42,7 @@
 		"port": "8125",
 		"prefix": "covenant"
 	},
-	"port": "8081",
+	"port": "8082",
 	"tls": {
 		"enabled": false
 	}

@@ -1,11 +1,11 @@
 FROM golang
 
-ENV PORT "8080"
+ENV PORT "8082"
 ENV GIN_MODE "release"
 
 ADD ./covenant.o /go/src/github.com/yuderekyu/covenant/covenant
 ADD ./covenant.json /go/src/github.com/yuderekyu/covenant/config.json
 
-ENTRYPOINT /go/src/github.com/yuderekyu/covenant/bloodlines
+ENTRYPOINT /go/src/github.com/yuderekyu/covenant/covenant
 
 EXPOSE 8082

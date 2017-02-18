@@ -1,6 +1,6 @@
 FROM golang
 
-ENV PORT "8080"
+ENV PORT "8084"
 ENV GIN_MODE "release"
 
 ADD ./towncenter.o /go/src/github.com/jakelong95/TownCenter/TownCenter

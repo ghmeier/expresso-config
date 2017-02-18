@@ -1,6 +1,6 @@
 FROM golang
 
-ENV PORT "8080"
+ENV PORT "8083"
 ENV GIN_MODE "release"
 
 ADD ./warehouse.o /go/src/github.com/lcollin/warehouse/warehouse
