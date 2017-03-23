@@ -5,53 +5,72 @@ services:
     image: ghmeier/bloodlines
     ports:
       - "8080:8080"
-    links:
+    depends_on:
        - mysql
        - rabbitmq
        - statsd
     environment:
       VIRTUAL_HOST: "bloodlines.expresso.store"
+      LETSENCRYPT_HOST: "bloodlines.expresso.store"
+      LETSENCRYPT_EMAIL: "meier.garret@gmail.com"
       VIRTUAL_PORT: "8080"
+      JWT_TOKEN: "${JWT}"
+      AWS_ACCESS_KEY_ID: "AKIAI4DA7P7HDCQNYYXA"
+      AWS_SECRET_ACCESS_KEY: "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"
+      AWS_REGION: "us-east-1"
   coinage:
     container_name: coinage
     image: ghmeier/coinage
     ports:
       - "8081:8081"
-    links:
+    depends_on:
        - mysql
        - statsd
     environment:
       VIRTUAL_HOST: "coinage.expresso.store"
+      LETSENCRYPT_HOST: "coinage.expresso.store"
+      LETSENCRYPT_EMAIL: "meier.garret@gmail.com"
       VIRTUAL_PORT: "8081"
+      JWT_TOKEN: "${JWT}"
+      AWS_ACCESS_KEY_ID: "AKIAI4DA7P7HDCQNYYXA"
+      AWS_SECRET_ACCESS_KEY: "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"
+      AWS_REGION: "us-east-1"
   expresso:
     container_name: expresso
     image: ghmeier/expresso
     ports:
       - "9000:9000"
-    links:
+    depends_on:
        - mysql
        - statsd
     environment:
       VIRTUAL_HOST: "expresso.store"
       LETSENCRYPT_HOST: "expresso.store"
       LETSENCRYPT_EMAIL: "meier.garret@gmail.com"
+      JWT_TOKEN: "${JWT}"
   covenant:
     container_name: covenant
     image: ghmeier/covenant
     ports:
       - "8082:8082"
-    links:
+    depends_on:
        - mysql
        - statsd
     environment:
       VIRTUAL_HOST: "covenant.expresso.store"
+      LETSENCRYPT_HOST: "covenant.expresso.store"
+      LETSENCRYPT_EMAIL: "meier.garret@gmail.com"
+      JWT_TOKEN: "${JWT}"
       VIRTUAL_PORT: "8082"
+      AWS_ACCESS_KEY_ID: "AKIAI4DA7P7HDCQNYYXA"
+      AWS_SECRET_ACCESS_KEY: "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"
+      AWS_REGION: "us-east-1"
   warehouse:
     container_name: warehouse
     image: ghmeier/warehouse
     ports:
       - "8083:8083"
-    links:
+    depends_on:
        - mysql
        - statsd
     environment:
@@ -59,17 +78,27 @@ services:
       VIRTUAL_PORT: "8083"
       LETSENCRYPT_HOST: "warehouse.expresso.store"
       LETSENCRYPT_EMAIL: "meier.garret@gmail.com"
+      JWT_TOKEN: "${JWT}"
+      AWS_ACCESS_KEY_ID: "AKIAI4DA7P7HDCQNYYXA"
+      AWS_SECRET_ACCESS_KEY: "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"
+      AWS_REGION: "us-east-1"
   towncenter:
     container_name: towncenter
     image: ghmeier/towncenter
     ports:
       - "8084:8084"
-    links:
+    depends_on:
        - mysql
        - statsd
     environment:
       VIRTUAL_HOST: "towncenter.expresso.store"
       VIRTUAL_PORT: "8084"
+      LETSENCRYPT_HOST: "towncenter.expresso.store"
+      LETSENCRYPT_EMAIL: "meier.garret@gmail.com"
+      JWT_TOKEN: "${JWT}"
+      AWS_ACCESS_KEY_ID: "AKIAI4DA7P7HDCQNYYXA"
+      AWS_SECRET_ACCESS_KEY: "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"
+      AWS_REGION: "us-east-1"
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy

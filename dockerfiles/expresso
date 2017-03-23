@@ -3,9 +3,8 @@ FROM node:boron
 ENV REACT_APP_STRIPE_PUB_KEY "pk_test_K0THZ9ac4Fl3p2irxZnZf4Zw"
 RUN npm install -g pushstate-server
 WORKDIR /expresso
-RUN git clone https://github.com/jonnykry/expresso ./
-RUN npm install
-RUN npm run build
+ADD ./expresso-build /expresso
+
 
 EXPOSE  9000
 CMD ["pushstate-server", "/expresso/build"]

@@ -35,12 +35,25 @@ else
 	git -C $GOPATH/src/github.com/yuderekyu/covenant clone git@github.com:yuderekyu/covenant .
 fi
 
+if [ -d "../../expresso" ]; then
+	git -C ../../expresso pull origin master
+else
+	mkdir -p ../../expresso
+	git -C ../../expresso clone git@github.com:jonnykry/expresso .
+fi
+
 rm bloodlines.o coinage.o towncenter.o warehouse.o covenant.o
 go build -o bloodlines.o github.com/ghmeier/bloodlines
 go build -o coinage.o github.com/ghmeier/coinage
 go build -o towncenter.o github.com/jakelong95/TownCenter
 go build -o warehouse.o github.com/lcollin/warehouse
 go build -o covenant.o github.com/yuderekyu/covenant
+
+cd ../../expresso
+npm install
+npm run build
+cd ../expresso-config/dockerfiles
+cp -R ../../expresso/build ./expresso-build
 
 sudo docker build -f bloodlines -t ghmeier/bloodlines .
 sudo docker push ghmeier/bloodlines

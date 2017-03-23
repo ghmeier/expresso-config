@@ -43,7 +43,7 @@
 		"prefix": "warehouse"
 	},
 	"port": "8083",
-	"tls": {
-		"enabled": false
+	"s3": {
+		"bucket": "warehouse"
 	}
 }
