@@ -1,4 +1,4 @@
-FROM golang
+FROM gliderlabs/alpine:3.4
 
 ENV PORT "8080"
 ENV GIN_MODE "release"

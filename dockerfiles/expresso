@@ -1,4 +1,4 @@
-FROM node:boron
+FROM mhart/alpine-node:6.10
 
 ENV REACT_APP_STRIPE_PUB_KEY "pk_test_K0THZ9ac4Fl3p2irxZnZf4Zw"
 RUN npm install -g pushstate-server

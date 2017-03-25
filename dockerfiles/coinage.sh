@@ -8,7 +8,7 @@ else
 fi
 
 rm coinage.o
-go build -o coinage.o github.com/ghmeier/coinage
+CGO_ENABLED=0 go build -o coinage.o github.com/ghmeier/coinage
 
 sudo docker build -f coinage -t ghmeier/coinage .
 sudo docker push ghmeier/coinage

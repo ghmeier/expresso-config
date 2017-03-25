@@ -8,7 +8,7 @@ else
 fi
 
 rm towncenter.o
-go build -o towncenter.o github.com/jakelong95/TownCenter
+CGO_ENABLED=0 go build -o towncenter.o github.com/jakelong95/TownCenter
 
 sudo docker build -f towncenter -t ghmeier/towncenter .
 sudo docker push ghmeier/towncenter

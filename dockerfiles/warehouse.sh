@@ -8,7 +8,7 @@ else
 fi
 
 rm warehouse.o
-go build -o warehouse.o github.com/lcollin/warehouse
+CGO_ENABLED=0 go build -o warehouse.o github.com/lcollin/warehouse
 
 sudo docker build -f warehouse -t ghmeier/warehouse .
 sudo docker push ghmeier/warehouse

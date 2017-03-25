@@ -8,7 +8,7 @@ else
 fi
 
 rm bloodlines.o
-go build -o bloodlines.o github.com/ghmeier/bloodlines
+CGO_ENABLED=0 go build -o bloodlines.o github.com/ghmeier/bloodlines
 
-sudo docker build -f bloodlines -t ghmeier/bloodlines .
+sudo docker build -f bloodlines -t ghmeier/bloodlines:latest .
 sudo docker push ghmeier/bloodlines

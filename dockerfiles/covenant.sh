@@ -8,7 +8,7 @@ else
 fi
 
 rm covenant.o
-go build -o covenant.o github.com/yuderekyu/covenant
+CGO_ENABLED=0 go build -o covenant.o github.com/yuderekyu/covenant
 
 sudo docker build -f covenant -t ghmeier/covenant .
 sudo docker push ghmeier/covenant
