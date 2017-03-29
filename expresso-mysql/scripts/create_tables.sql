@@ -28,6 +28,12 @@ CREATE TABLE user(
 	roasterId VARCHAR(36),
 	isRoaster SMALLINT
 );
+CREATE TABLE token(
+	value VARCHAR(36) NOT NULL,
+	email VARCHAR(200) NOT NULL PRIMARY KEY,
+	createdAt TIMESTAMP NOT NULL,
+	status VARCHAR(20)
+);
 CREATE DATABASE IF NOT EXISTS bloodlines;
 USE bloodlines;
 CREATE TABLE content(

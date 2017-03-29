@@ -43,11 +43,11 @@ else
 fi
 
 rm bloodlines.o coinage.o towncenter.o warehouse.o covenant.o
-go build -o bloodlines.o github.com/ghmeier/bloodlines
-go build -o coinage.o github.com/ghmeier/coinage
-go build -o towncenter.o github.com/jakelong95/TownCenter
-go build -o warehouse.o github.com/lcollin/warehouse
-go build -o covenant.o github.com/yuderekyu/covenant
+CGO_ENABLED=0 go build -o bloodlines.o github.com/ghmeier/bloodlines
+CGO_ENABLED=0 go build -o coinage.o github.com/ghmeier/coinage
+CGO_ENABLED=0 go build -o towncenter.o github.com/jakelong95/TownCenter
+CGO_ENABLED=0 go build -o warehouse.o github.com/lcollin/warehouse
+CGO_ENABLED=0 go build -o covenant.o github.com/yuderekyu/covenant
 
 cd ../../expresso
 npm install
