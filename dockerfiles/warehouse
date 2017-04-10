@@ -1,4 +1,4 @@
-FROM gliderlabs/alpine:3.4
+FROM iron/go
 
 ENV PORT "8083"
 ENV GIN_MODE "release"

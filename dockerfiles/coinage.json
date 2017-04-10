@@ -35,7 +35,11 @@
 	"rabbit": {
 		"host": "rabbitmq",
 		"port": "5672",
-		"pubq": "messages"
+		"pubq": "events"
+	},
+	"stripe": {
+		"secret": "sk_test_slJMpULQGwUu5r0NkPFVefIM",
+		"public": "pk_test_K0THZ9ac4Fl3p2irxZnZf4Zw"
 	},
 	"statsd": {
 		"host": "statsd",

@@ -1,7 +1,7 @@
-FROM gliderlabs/alpine:3.4
+FROM iron/go
 
 ENV PORT "8080"
-ENV GIN_MODE "release"
+ENV GIN_MODE "debug"
 
 ADD ./coinage.o /go/src/github.com/ghmeier/coinage/coinage
 ADD ./coinage.json /go/src/github.com/ghmeier/coinage/config.json
