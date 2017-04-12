@@ -9,7 +9,7 @@ fi
 
 cd ../../expresso
 npm install
-npm run build
+REACT_APP_STRIPE_PUB_KEY="pk_test_K0THZ9ac4Fl3p2irxZnZf4Zw" npm run build
 cd ../expresso-config/dockerfiles
 cp -R ../../expresso/build ./expresso-build
 

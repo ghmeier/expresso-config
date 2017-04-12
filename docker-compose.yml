@@ -44,6 +44,8 @@ services:
        - mysql
        - statsd
     environment:
+      NODE_ENV: production
+      env_file: .env
       VIRTUAL_HOST: "expresso.store"
       LETSENCRYPT_HOST: "expresso.store"
       LETSENCRYPT_EMAIL: "meier.garret@gmail.com"
