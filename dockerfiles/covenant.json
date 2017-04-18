@@ -43,6 +43,9 @@
 		"prefix": "covenant"
 	},
 	"port": "8082",
+    "shippo": {
+        "token": "shippo_test_c235414aacd89a1597122e88e28476c624b8f106"
+    },
 	"tls": {
 		"enabled": false
 	}

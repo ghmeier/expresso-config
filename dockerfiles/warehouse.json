@@ -35,7 +35,7 @@
 	"rabbit": {
 		"host": "rabbitmq",
 		"port": "5672",
-		"pubq": "messages"
+		"pubq": "shippo"
 	},
 	"statsd": {
 		"host": "statsd",

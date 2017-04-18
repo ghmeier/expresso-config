@@ -25,6 +25,7 @@ services:
       - "8081:8081"
     depends_on:
        - mysql
+       - rabbitmq
        - statsd
     environment:
       VIRTUAL_HOST: "coinage.expresso.store"
@@ -74,6 +75,7 @@ services:
       - "8083:8083"
     depends_on:
        - mysql
+       - rabbitmq
        - statsd
     environment:
       VIRTUAL_HOST: "warehouse.expresso.store"
