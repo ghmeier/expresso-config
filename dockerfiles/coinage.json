@@ -39,7 +39,12 @@
 	},
 	"stripe": {
 		"secret": "sk_test_slJMpULQGwUu5r0NkPFVefIM",
-		"public": "pk_test_K0THZ9ac4Fl3p2irxZnZf4Zw"
+		"public": "pk_test_K0THZ9ac4Fl3p2irxZnZf4Zw",
+		"applicationFee": 1.00,
+		"stripeFee": 2.9
+	},
+	"shippo": {
+		"token": "shippo_test_c235414aacd89a1597122e88e28476c624b8f106"
 	},
 	"statsd": {
 		"host": "statsd",
