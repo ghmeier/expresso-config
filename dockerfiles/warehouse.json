@@ -48,5 +48,5 @@
 	"port": "8083",
 	"s3": {
 		"bucket": "warehouse"
-	},
+	}
 }
